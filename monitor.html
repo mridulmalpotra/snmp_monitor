@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<TITLE>Bandwidth Usage</TITLE>
+	<meta http-equiv="refresh" content="5">
+
+	<style type="text/css">
+	 body {
+	    padding-top: 40px;
+	    padding-bottom: 40px;
+	    background-color: #eee;
+	    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	    font-size: 14px;
+	    line-height: 1.428571429;
+	    color: #333333;
+	  }
+
+	  button,
+	  input,
+	  select,
+	  textarea {
+	    margin: 0;
+	    font-family: inherit;
+	    font-size: 100%;
+	  }
+
+	  button,
+	  input {
+	    line-height: normal;
+	  }
+
+
+	  button,
+	  html input[type="button"],
+	  input[type="reset"],
+	  input[type="submit"] {
+	    cursor: pointer;
+	    -webkit-appearance: button;
+	  }
+
+
+	  .container {
+	    padding-right: 15px;
+	    padding-left: 15px;
+	    margin-right: auto;
+	    margin-left: auto;
+	  }
+
+	  .container:before,
+	  .container:after {
+	    display: table;
+	    content: " ";
+	  }
+
+	  .container:after {
+	    clear: both;
+	  }
+
+	  .container:before,
+	  .container:after {
+	    display: table;
+	    content: " ";
+	  }
+
+	  .container:after {
+	    clear: both;
+	  }
+
+	  .timer{
+	    color: #e74c3c;
+	  }
+
+	  .btn {
+	    display: block;
+	    margin-bottom: 0;
+	    font-weight: normal;
+	    text-align: center;
+	    white-space: nowrap;
+	    vertical-align: middle;
+	    background-color: #389a96;
+	    border:none;
+	    color:#ffffff;
+	    cursor: pointer;
+	    margin-top: 20px;
+	    background-image: none;
+	    padding: 10px 16px;
+	    margin-left: auto;
+	    margin-right: auto;
+	    width: 150px;
+	    text-decoration: none;
+	    padding-right: 0;
+	    padding-left: 0;
+	    font-size: 18px;
+	    line-height: 1.33;
+	    border-radius: 6px;
+	    -webkit-user-select: none;
+	       -moz-user-select: none;
+	        -ms-user-select: none;
+	         -o-user-select: none;
+	            user-select: none;
+	  }
+
+	  .btn:focus {
+	    outline: thin dotted #333;
+	    outline: 5px auto -webkit-focus-ring-color;
+	    outline-offset: -2px;
+	  }
+
+	  .btn:hover,
+	  .btn:focus {
+	    background-color: #318884;
+	    color:#ffffff;
+	    text-decoration: none;
+	  }
+
+	  .btn:active,
+	  .btn.active {
+	    background-image: none;
+	    outline: 0;
+	    -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+	            box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+	  }
+
+	  a {
+	    color: #428bca;
+	    text-decoration: none;
+	  }
+
+	  a:hover,
+	  a:focus {
+	    color: #2a6496;
+	    text-decoration: underline;
+	  }
+
+	  a:focus {
+	    outline: thin dotted #333;
+	    outline: 5px auto -webkit-focus-ring-color;
+	    outline-offset: -2px;
+	  }
+
+	  .logo{
+	    display: block;
+	      margin-left: auto;
+	      margin-right: auto;
+	  }
+
+	  h2,h4{
+	    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	    font-weight: 500;
+	    line-height: 1.1;
+	    color: inherit;
+	    text-align:center;
+	  }
+
+	  h2{
+	    font-size: 30px;
+	    margin-top: 20px;
+	    margin-bottom: 10px;
+	  }
+
+	  h4{
+	    margin-top: 10px;
+	    margin-bottom: 10px;
+	    font-size: 18px;
+	  }
+
+	  @media (min-width: 768px) {
+	    .container {
+	      width: 750px;
+	    }
+	  }
+
+	  @media (min-width: 992px) {
+	    .container {
+	      width: 970px;
+	    }
+	  }
+
+	  @media (min-width: 1200px) {
+	    .container {
+	      width: 1170px;
+	    }
+	  }
+	</style>
+	</head>
+
+	<body>
+		<div class="container">
+			<center>
+			<img src="images/logo.png" alt="IIIT-Delhi">
+			<h2><b>Bandwidth Monitoring Portal</b></h2>
+				<br>
+				<h4><u>10 Minutes - Time Period</u></h4>
+			   	<span><img src="images/monitorin-10min.png" alt="SNMP Monitoring Bandwidth">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/monitorout-10min.png" alt="SNMP Monitoring Bandwidth"></span>
+			   	<br><img src="images/monitor-10min.png" alt="SNMP Monitoring Bandwidth">
+			   	<br><br><br><br>
+				<h4><u>1 Hour - Time Period</u></h4>
+			   	<span><img src="images/monitorin-1hr.png" alt="SNMP Monitoring Bandwidth">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/monitorout-1hr.png" alt="SNMP Monitoring Bandwidth"></span>
+			   	<br><img src="images/monitor-1hr.png" alt="SNMP Monitoring Bandwidth">
+			   	<br><br><br><br>
+				<h4><u>1 Day - Time Period</u></h4>
+			   	<span><img src="images/monitorin-1day.png" alt="SNMP Monitoring Bandwidth">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/monitorout-1day.png" alt="SNMP Monitoring Bandwidth"></span>
+			   	<br><img src="images/monitor-1day.png" alt="SNMP Monitoring Bandwidth">
+			</center>
+		</div>
+
+		<div class="footer" align="center">
+			<br><br><br><br><br><br><br><br>
+			<p><i><font color="black">Monitoring Portal through SNMP | Mridul Malpotra (2012061)</font></i></p>
+		</div>
+	</body>
+</html>
