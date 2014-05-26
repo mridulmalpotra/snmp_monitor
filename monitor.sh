@@ -29,9 +29,8 @@ echo "SNMP Client found"
 
 echo
 devid=`snmpget -v1 -c $com_str $ip_addr ipForwarding.0 | tail -c 3 | head -c 1`
-uptime=`snmpget -v1 -c public 192.168.0.34 sysUpTime.0 | awk '{print $(NF-2) $(NF-1) $NF}'`
-descr=`snmpget -v1 -c public 192.168.0.34 sysDescr.0 | awk -F '=' '{print $2}' | awk -F ':' '{print $NF}'`
-ports=`snmpwalk -v1 -c public 192.168.0.34 interfaces.ifTable.ifEntry.ifDescr | grep -v GigabitEthernet | awk '{printf("%s, ",$NF); }'`
+uptime=`snmpget -v1 -c $com_str $ip_addr sysUpTime.0 | awk '{print $(NF-2) $(NF-1) $NF}'`
+descr=`snmpget -v1 -c $com_str $ip_addr sysDescr.0 | awk -F '=' '{print $2}' | awk -F ':' '{print $NF}'`
 
 
 echo
@@ -51,7 +50,10 @@ fi
 echo 'Uptime: ' $uptime
 echo 'Device Information: '$descr
 echo
-echo 'States to be monitored: ' $ports
+echo 'States to be monitored: '
+snmpwalk -v1 -c $com_str $ip_addr interfaces.ifTable.ifEntry.ifDescr | grep -v GigabitEthernet
+echo
+read -p 'Enter vlan ID:' vlan
 echo
 echo
 echo '==================================================================================='
@@ -64,16 +66,15 @@ echo
 echo
 echo "Launching portal interface..."
 sleep 1
-sensible-browser ./monitor.html &
-PID=`jobs -p`
+sensible-browser ./monitor.html & PID=`jobs -p`
 
 while [[ true ]]; 
 do
-		in=`snmpget -v1 -c public $ip_addr interfaces.ifTable.ifEntry.ifInOctets.10 | tr -d '\n' | awk '{print $NF}'`
-		out=`snmpget -v1 -c public $ip_addr interfaces.ifTable.ifEntry.ifOutOctets.10 | tr -d '\n' | awk '{print $NF}'`
+		inp=`snmpget -v1 -c $com_str $ip_addr interfaces.ifTable.ifEntry.ifInOctets.$vlan | tr -d '\n' | awk '{print $NF}'`
+		out=`snmpget -v1 -c $com_str $ip_addr interfaces.ifTable.ifEntry.ifOutOctets.$vlan | tr -d '\n' | awk '{print $NF}'`
 		n=`date "+"%s""`
 		echo `date "+"%s""`"created on:" `date` >> img_config.log
-		rrdtool update monitor.rrd $n:$in:$out
+		rrdtool update monitor.rrd $n:$inp:$out
 		rrdtool graph ./images/monitorin-10min.png --start -600 --vertical-label Bits-per-second \
             COMMENT:"Input" \
             DEF:inmaximum=monitor.rrd:input:MAX \
